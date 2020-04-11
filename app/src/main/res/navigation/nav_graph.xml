@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="pl.lodz.project.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="pl.lodz.project.task.TaskFragment"
+        android:label="TaskFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="pl.lodz.project.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/publicationsFragment"
+        android:name="pl.lodz.project.publications.PublicationsFragment"
+        android:label="PublicationsFragment" />
+    <fragment
+        android:id="@+id/timeTableFragment"
+        android:name="pl.lodz.project.timetable.TimeTableFragment"
+        android:label="TimeTableFragment" />
+</navigation>

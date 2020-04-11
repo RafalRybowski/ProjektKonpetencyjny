@@ -2,4 +2,15 @@
     <string name="app_name">ProjektKonpetencyjny</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
+    <string name="task">Task</string>
+    <string name="timetable">TimeTable</string>
+    <string name="publications">Publications</string>
+    <string name="profile">Profile</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="degree">Degree</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="position">Position</string>
+    <string name="counter_publications">Counter Publications:</string>
+    <string name="your_publications">Your Publications:</string>
 </resources>

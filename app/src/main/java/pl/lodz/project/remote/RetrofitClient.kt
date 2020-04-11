@@ -13,7 +13,7 @@ object RetrofitClient {
             .build()
     }
 
-    fun getClient(): Retrofit{
+    fun getClient(): Retrofit {
         return retrofit
     }
 }

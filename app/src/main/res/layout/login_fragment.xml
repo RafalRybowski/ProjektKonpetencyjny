@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginActivity"
-    android:background="@color/colorPrimary">
+    tools:context=".login.LoginFragment"
+    android:background="@color/gray">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -76,7 +76,10 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
                 android:background="@color/colorAccent"
+                android:textSize="@dimen/textSize"
                 android:text="@string/login"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
