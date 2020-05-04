@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/profileImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginStart="@dimen/margin"
             android:layout_marginTop="@dimen/margin"
             android:layout_marginBottom="@dimen/margin"
@@ -63,6 +63,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
+    <EditText
+        android:id="@+id/phoneProfileInfo"
+        style="@style/EditTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:cursorVisible="false"
+        android:background="@android:color/transparent"
+        android:focusable="false"
+        android:inputType="phone"
+        android:text="000000000"
+        app:layout_constraintBottom_toBottomOf="@+id/phoneProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toEndOf="@+id/phoneProfile"
+        app:layout_constraintTop_toTopOf="@+id/phoneProfile" />
+
     <TextView
         android:id="@+id/positionProfile"
         style="@style/TextStyle"
@@ -73,7 +89,21 @@
         app:layout_constraintTop_toBottomOf="@+id/phoneProfile" />
 
     <TextView
-        android:id="@+id/publicationsProfile"
+        android:id="@+id/positionProfileInfo"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:focusable="false"
+        android:text="dr"
+        app:layout_constraintBottom_toBottomOf="@+id/positionProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toEndOf="@+id/positionProfile"
+        app:layout_constraintTop_toTopOf="@+id/positionProfile" />
+
+    <TextView
+        android:id="@+id/counterPublicationsProfile"
         style="@style/TextStyle"
         android:layout_marginStart="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
@@ -82,22 +112,36 @@
         app:layout_constraintTop_toBottomOf="@+id/positionProfile" />
 
     <TextView
-        android:id="@+id/counterPublicationsProfile"
+        android:id="@+id/counterPublicationsProfileInfo"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/counterPublicationsProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toEndOf="@+id/counterPublicationsProfile"
+        app:layout_constraintTop_toTopOf="@+id/counterPublicationsProfile" />
+
+    <TextView
+        android:id="@+id/publicationsProfile"
         style="@style/TextStyle"
         android:layout_marginStart="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
         android:text="@string/your_publications"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/publicationsProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/counterPublicationsProfile" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerProfile"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/counterPublicationsProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/publicationsProfile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

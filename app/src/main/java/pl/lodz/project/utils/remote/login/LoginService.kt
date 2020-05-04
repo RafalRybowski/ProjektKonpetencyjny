@@ -1,4 +1,4 @@
-package pl.lodz.project.remote.login
+package pl.lodz.project.utils.remote.login
 
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

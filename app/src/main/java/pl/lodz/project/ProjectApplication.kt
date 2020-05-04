@@ -1,13 +1,16 @@
 package pl.lodz.project
 
 import android.app.Application
-import pl.lodz.project.remote.RetrofitClient
+import pl.lodz.project.utils.remote.RetrofitClient
 
 class ProjectApplication: Application() {
 
+    companion object{
+        const val serverUrl = "http:/192.168.0.166:3000/"
+    }
+
     override fun onCreate() {
         super.onCreate()
-        //TODO change baseUrl
-        RetrofitClient.createClient("http:/192.168.1.107:3000/")
+        RetrofitClient.createClient(serverUrl)
     }
 }

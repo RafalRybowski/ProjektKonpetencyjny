@@ -1,23 +1,53 @@
 package pl.lodz.project.login
 
-import android.util.Log
-import pl.lodz.project.remote.RetrofitClient
-import pl.lodz.project.remote.login.LoginService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import pl.lodz.project.utils.remote.RetrofitClient
+import pl.lodz.project.utils.remote.login.LoginResponse
+import pl.lodz.project.utils.remote.login.LoginService
+import pl.lodz.project.utils.remote.login.LoginStatus
+import pl.lodz.project.utils.CurrentUser
 import java.lang.Exception
-import java.net.SocketTimeoutException
+import kotlin.coroutines.CoroutineContext
 
-class LoginPresenter(private val view: Login){
+class LoginPresenter(private val view: Login): CoroutineScope {
 
-    suspend fun onLogin(login: String, password: String) {
-        //TODO uncoment when logic o server will be created or used
-        try {
-//            val loginService = RetrofitClient.getClient().create(LoginService::class.java)
-//            val a = loginService.login(login, password)
-//            Log.i("haha", a.toString())
-            view.onSuccess()
-        } catch (exception: Exception) {
-            view.onFailure(exception.toString())
+    override val coroutineContext: CoroutineContext = Dispatchers.IO
+
+    fun onLogin(login: String, password: String) {
+        launch {
+            try {
+                val loginService = RetrofitClient.getClient().create(LoginService::class.java)
+                val response = loginService.login(login, password)
+                responseProcess(response)
+            } catch (exception: Exception) {
+                withContext(Dispatchers.Main) {
+                    showError(exception.toString())
+                }
+            }
         }
     }
+
+    suspend fun responseProcess(response: LoginResponse) {
+        withContext(Dispatchers.Main) {
+            if(response.status == LoginStatus.SUCCESS) {
+                CurrentUser.setUser(response)
+                toSuccess()
+            } else {
+                showError("Can't login")
+            }
+        }
+    }
+
+    private fun toSuccess() {
+        view.onSuccess()
+    }
+
+    private fun showError(exception: String){
+        view.onFailure(exception)
+    }
+
 
 }

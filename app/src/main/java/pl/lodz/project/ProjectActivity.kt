@@ -28,6 +28,7 @@ class ProjectActivity: AppCompatActivity() {
             setComponentVisibilty(destination)
         }
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            item.isChecked = true
             val idFragment = when(item.itemId) {
                 R.id.menuProfile -> R.id.profileFragment
                 R.id.menuTask -> R.id.taskFragment

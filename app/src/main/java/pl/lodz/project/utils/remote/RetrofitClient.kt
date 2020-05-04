@@ -1,4 +1,4 @@
-package pl.lodz.project.remote
+package pl.lodz.project.utils.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

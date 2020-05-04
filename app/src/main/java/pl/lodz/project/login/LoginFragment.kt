@@ -16,8 +16,6 @@ import pl.lodz.project.navigation.getNavigator
 class LoginFragment : Fragment(), Login {
 
     private val loginPresenter = LoginPresenter(this)
-    private val scopeIO = CoroutineScope(Dispatchers.IO)
-    private val scopeUI = CoroutineScope(Dispatchers.Main)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,24 +28,17 @@ class LoginFragment : Fragment(), Login {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loginButton.setOnClickListener {
-            scopeIO.launch {
-                val login = loginEditText.text.toString()
-                val password = passwordEditText.text.toString()
-                loginPresenter.onLogin(login, password)
-            }
+            val login = loginEditText.text.toString()
+            val password = passwordEditText.text.toString()
+            loginPresenter.onLogin(login, password)
         }
     }
 
     override fun onSuccess() {
-        scopeUI.launch {
-            requireActivity().getNavigator()
-                .navigate(LoginFragmentDirections.actionLoginFragmentToTaskFragment())
-        }
+        requireActivity().getNavigator().navigate(LoginFragmentDirections.actionLoginFragmentToTaskFragment())
     }
 
     override fun onFailure(error: String) {
-        scopeUI.launch {
-            Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
-        }
+        Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
     }
 }
