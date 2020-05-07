@@ -60,8 +60,7 @@ class ProfileFragment : Fragment(), Profile {
     }
 
     override fun setPhone(phone: String) {
-        phoneProfileInfo.text.clear()
-        phoneProfileInfo.text.append(phone)
+        phoneProfileInfo.text = phone
     }
 
     override fun setPosition(position: String) {
