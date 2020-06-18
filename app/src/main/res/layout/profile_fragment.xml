@@ -22,10 +22,10 @@
             android:layout_marginStart="@dimen/margin"
             android:layout_marginTop="@dimen/margin"
             android:layout_marginBottom="@dimen/margin"
+            android:src="@drawable/ic_person_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/nameProfile"

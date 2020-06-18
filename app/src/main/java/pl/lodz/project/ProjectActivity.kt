@@ -32,7 +32,7 @@ class ProjectActivity: AppCompatActivity() {
             val idFragment = when(item.itemId) {
                 R.id.menuProfile -> R.id.profileFragment
                 R.id.menuTask -> R.id.taskFragment
-                R.id.menuPublications -> R.id.publicationsFragment
+                R.id.menuPublications -> R.id.publicationSearchFragment
                 R.id.menuTimeTable -> R.id.timeTableFragment
                 else -> throw Exception("This Fragment doesn't exist")
             }

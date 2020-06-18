@@ -1,7 +1,6 @@
 package pl.lodz.project.profile
 
 import android.net.Uri
-import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -9,36 +8,54 @@ import kotlinx.coroutines.withContext
 import pl.lodz.project.ProjectApplication.Companion.serverUrl
 import pl.lodz.project.utils.CurrentUser
 import pl.lodz.project.utils.remote.RetrofitClient
-import pl.lodz.project.utils.remote.publications.PublicationsService
+import pl.lodz.project.utils.remote.profile.ProfilePublication
+import pl.lodz.project.utils.remote.profile.ProfileService
+import pl.lodz.project.utils.remote.profile.ProfileUserInfo
+import retrofit2.HttpException
 import kotlin.coroutines.CoroutineContext
 
-class ProfilePresenter(private val view: Profile) : CoroutineScope {
+class ProfilePresenter(private val view: Profile.View) : CoroutineScope, Profile.Presenter {
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO
+    private val service by lazy {
+        RetrofitClient.getClient().create(ProfileService::class.java)
+    }
 
-    fun onCreate(){
-        val user = CurrentUser.getUser()
-        view.setImage(Uri.parse(serverUrl + user.image))
-        view.setName(user.name)
-        view.setSurname(user.surname)
-        view.setDegree(user.degree)
-        view.setPhone(user.phone)
-        view.setPosition(user.position)
+    override fun onCreate() {
         launch {
-            getPublicationsList(user.userId)
+            try {
+                val response = service.getProfile(CurrentUser.getUser())
+                val user = response.rowProfile
+                setUserProfile(user)
+                response.rowsPub?.let {
+                    setPublicationList(it)
+                }
+            } catch (e: HttpException) {
+                withContext(Dispatchers.Main) {
+                    view.onFailure("Cannot get profile information")
+                }
+            }
         }
     }
 
-    suspend fun getPublicationsList(userId: Int) {
-        val service = RetrofitClient.getClient().create(PublicationsService::class.java)
-        try {
-            val publications = service.getPublications(userId)
-            withContext(Dispatchers.Main){
-                view.setCounterPublication(publications.size)
-                view.setRecyclerView(publications)
+    private suspend fun setUserProfile(user: ProfileUserInfo) {
+        withContext(Dispatchers.Main) {
+            view.setName(user.IMIE)
+            view.setSurname(user.NAZWISKO)
+            view.setPhone(user.NUMER_TELEFONU)
+            view.setPosition(user.NAZWA_TYPU_KONTA)
+            view.setDegree(user.TYTUL)
+            user.IMAGE?.let {
+                view.setImage(Uri.parse("$serverUrl/$it"))
             }
-        }catch (e: Exception) {
-            Log.i("dupe", "$e")
         }
+    }
+
+    private suspend fun setPublicationList(publications: List<ProfilePublication>) {
+        withContext(Dispatchers.Main) {
+            view.setCounterPublication(publications.size)
+            view.setRecyclerView(publications)
+        }
+
     }
 }
