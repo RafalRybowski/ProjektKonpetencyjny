@@ -1,6 +1,12 @@
 package pl.lodz.project.login
 
 interface Login {
-    fun onSuccess()
-    fun onFailure(error: String)
+    interface View {
+        fun onSuccess()
+        fun onFailure(error: String)
+    }
+
+    interface Presenter {
+        fun onLogin(login: String, password: String)
+    }
 }

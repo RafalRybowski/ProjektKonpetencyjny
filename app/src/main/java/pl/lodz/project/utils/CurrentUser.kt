@@ -3,19 +3,12 @@ package pl.lodz.project.utils
 import pl.lodz.project.utils.remote.login.LoginResponse
 
 object CurrentUser {
-    private lateinit var user: UserInformation
+    private var userID: Int = 0
 
     fun setUser(loginResponse: LoginResponse){
-        user = UserInformation(
-            loginResponse.userId,
-            loginResponse.degree,
-            loginResponse.name,
-            loginResponse.surname,
-            loginResponse.position,
-            loginResponse.phone,
-            loginResponse.image
-        )
+        userID = loginResponse.ID_KONTA
+
     }
 
-    fun getUser() = user
+    fun getUser() = userID
 }

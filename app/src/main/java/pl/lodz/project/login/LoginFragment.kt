@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import pl.lodz.project.R
 import pl.lodz.project.navigation.getNavigator
 
-class LoginFragment : Fragment(), Login {
+class LoginFragment : Fragment(), Login.View {
 
     private val loginPresenter = LoginPresenter(this)
 
