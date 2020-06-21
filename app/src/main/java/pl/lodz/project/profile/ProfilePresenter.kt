@@ -42,7 +42,9 @@ class ProfilePresenter(private val view: Profile.View) : CoroutineScope, Profile
         withContext(Dispatchers.Main) {
             view.setName(user.IMIE)
             view.setSurname(user.NAZWISKO)
-            view.setPhone(user.NUMER_TELEFONU)
+            user.NUMER_TELEFONU?.let {
+                view.setPhone(it)
+            }
             view.setPosition(user.NAZWA_TYPU_KONTA)
             view.setDegree(user.TYTUL)
             user.IMAGE?.let {

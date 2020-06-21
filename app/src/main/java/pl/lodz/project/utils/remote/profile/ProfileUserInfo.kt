@@ -8,6 +8,6 @@ data class ProfileUserInfo (
     val ID_TYPU_KONTA : Int,
     val SPECJALIZACJA : String,
     val IMAGE : String?,
-    val NUMER_TELEFONU : String,
+    val NUMER_TELEFONU : String?,
     val NAZWA_TYPU_KONTA : String
 )

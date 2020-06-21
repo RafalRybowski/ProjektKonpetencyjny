@@ -28,9 +28,15 @@ class PublicationsPresenter(private val view: Publications.View) : CoroutineScop
 
     private fun getAuthors(idAuthors: Int) {
         launch {
-            val response = service.getProfile(idAuthors)
-            withContext(Dispatchers.Main) {
-                view.setAuthors(response.toString())
+            try {
+                val response = service.getProfile(idAuthors)
+                withContext(Dispatchers.Main) {
+                    view.setAuthors(response.toString())
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    view.setAuthors("empty")
+                }
             }
         }
     }
